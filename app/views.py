@@ -1,6 +1,10 @@
 from flask import render_template
 from app import app
 
+import requests
+import json
+import os
+
 # Views
 @app.route('/')
 def index():
@@ -8,13 +12,15 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-    message = 'NewsHighlights'
-    return render_template('index.html', message = message)
+    req = requests.get('https://newsapi.org/v2/everything?q=bitcoin&apiKey={}'.format(os.environ.get("NEWS_API_KEY")))
+    data = json.loads(req.content)['articles'][0]
+    return render_template('index.html', data=data)
 
-@app.route('/news')
+@app.route('/news', methods=['GET'])
 def allnews():
-    return render_template('allnews.html')    
+    req = requests.get('https://newsapi.org/v2/everything?q=bitcoin&apiKey={}'.format(os.environ.get("NEWS_API_KEY")))
+    data = json.loads(req.content)
+    return render_template('allnews.html', data=data['articles'])
 
-@app.route('/news/<news_id>')
-def news(news_id):
-    return render_template('news.html',id = news_id)
+
+

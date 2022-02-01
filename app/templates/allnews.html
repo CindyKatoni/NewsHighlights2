@@ -1,5 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>View all the latest news</h1>
+<h1>View all the latest news</h1>
+<div class="container">
+    <div class="row">
+        {% for article in data %}
+        <div class="col-4">
+            <div class="card" style="width: 18rem; ">
+                <img src="{{article.urlToImage}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.name }}</h5>
+                    <p class="card-text">{{ article.description }}</p>
+                    <a href="{{ article.url }}" target="_blank" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+       
+
+        {% endfor %}
+
+    </div>
+
+
+</div>
 {% endblock %}

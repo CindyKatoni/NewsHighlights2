@@ -1,5 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1> {{ message }}</h1>
+    <div class="container-fluid" style="height: 80vh; background-image: url({{data.urlToImage}});
+    background-repeat: no-repeat; ">
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <h3 style="padding: 12.5% 0; color: antiquewhite;">{{ data.description }}</h3>
+                <a href="{{ data.url }}" target="_blank" class="btn btn-info">Read more..</a>
+            </div>
+            
+        </div>
+    </div>
+        
+    </div>
+      
 {% endblock %}
